@@ -696,6 +696,22 @@ for out in output:
         i = i + 1
 
 ```  
+
+## 🚀 Running the Project
+
+- Install all the imported Libraries.
+- Install Flask
+
+```bash
+  pip install [name-of-library]
+```
+
+- Run the Project via terminal
+```bash
+  cd UI
+  Python Search.py
+```
+
 ## References
 
  - [Gensim Documentation](https://radimrehurek.com/gensim/auto_examples/core/run_core_concepts.html#sphx-glr-auto-examples-core-run-core-concepts-py)
