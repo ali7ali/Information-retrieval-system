@@ -1,5 +1,6 @@
 
 # Information Retrieval System
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
 *Damascus University - Faculty of Information Technology Engineering*
 
@@ -696,7 +697,20 @@ for out in output:
         i = i + 1
 
 ```  
-
+### 🛠 Files Structure
+    .
+    ├── UI
+    |   ├── templates
+            ├── back.jpg
+            ├── index.html
+            ├── main.css
+            ├── result.html
+         ── Search.py # Main file to run the UI
+    ├── IR project.ipynb        # The main project in Jupyter notebook
+    ├── mian.py                 # The same as IR project.ipynb but converted to work with the UI
+    ├── README.md               # Project Documentation
+    └── ...
+    
 ## 🚀 Running the Project
 
 - Install all the imported Libraries.
@@ -727,3 +741,6 @@ for out in output:
 - [@SamehaNsr](https://github.com/SamehaNsr)
 - [@Ali-A-Ali](https://github.com/Ali-A-Ali)
 
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
