@@ -564,7 +564,7 @@ cisi_queries_result = matching_function(cisi_df.content,cisi_queries,cisi_answer
 cisi_accurecy_measures = calculate_measures(cisi_answers_dictionary.values() , cisi_queries_result.values(),1500)
 cisi_accurecy_measures_df = pd.DataFrame(cisi_accurecy_measures)
 
-#precision_average = sum(cisi_accurecy_measures_df.precision) / len(cisi_accurecy_measures_df.precision)
+precision_average = sum(cisi_accurecy_measures_df.precision) / len(cisi_accurecy_measures_df.precision)
 
 
 
@@ -573,10 +573,8 @@ cacm_accurecy_measures = calculate_measures(cacm_answers_dictionary.values() , c
 cacm_accurecy_measures_df = pd.DataFrame(cacm_accurecy_measures)
 
 
-#precision_average = sum(cacm_accurecy_measures_df.precision) / len(cacm_accurecy_measures_df.precision)
+precision_average = sum(cacm_accurecy_measures_df.precision) / len(cacm_accurecy_measures_df.precision)
 
-
-from sklearn.feature_extraction.text import TfidfTransformer
 
 from sklearn.feature_extraction.text import TfidfTransformer
 
@@ -588,15 +586,15 @@ def query_documents(corpus_id, query_id):
     train_set = cisi_df.content
     documents = []
     answers_dictionary = cisi_answers_dictionary
-    vectorizer = CountVectorizer(stop_words = stopwords)
+    vectorizer = CountVectorizer(stop_words = stop_words)
     transformer = TfidfTransformer()
     new_test = []
-    if (corpus_id == 1):
-        train_set = list(cisi_df.content)
+    if (int(corpus_id) == 1):
+        train_set = cisi_df.content
         answers_dictionary = cisi_answers_dictionary
 
-    if (corpus_id == 2):
-        train_set = list(cacm_df.content)
+    if (int(corpus_id) == 2):
+        train_set = cacm_df.content
         answers_dictionary = cacm_answers_dictionary
 
     test = search_for_query(query_id, corpus_id)
@@ -620,27 +618,32 @@ def query_documents(corpus_id, query_id):
             d_cosines.append(cx(vector, testV))
 
     transformer.fit(trainVectorizerArray)
-    number = len(answers_dictionary.get(query_id + 1))
+    number = len(answers_dictionary.get(int(query_id) + 1))
     out = np.array(d_cosines).argsort()[-number:][::-1]
     out.sort()
     i = 0
+
+    bodys = []
     for num in out:
         out[i] = num + 1
         i = i + 1
     for num in out:
         documents.append(num)
+        if (int(corpus_id) == 1):
+            bodys.append(cisi_df.content.loc[num - 1])
+        else:
+            bodys.append(cacm_df.content.loc[num - 1])
+        print(num)
 
-    result = {'title': [], 'body': []}
-    for num in documents:
-        result['title'].append(num)
-        result['body'].append(cisi_df.content.loc[num - 1])
+    result = {'id': documents, 'body': bodys}
+
 
     return result
 
 
 def search_for_query(query_id, queries_document_id):
     query_id = int(query_id)
-    if (queries_document_id == 1):
+    if (int(queries_document_id) == 1):
         return cisi_queries[query_id]
     else:
         return cacm_queries[query_id]
