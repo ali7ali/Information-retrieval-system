@@ -1,26 +1,14 @@
 <html>
 <head>
-<style>
-    tr:nth-child(even) {background: #CCC}
-    tr:nth-child(odd) {background: #FFF}
-</style>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="bootstrap.min.js"></script>
+      <script src="bootstrap.bundle.min.js"></script>
 </head>
-<body style="text-align: center; background: url({{ url_for('static', filename='back.jpg') }}); background-size: cover;">
-<h1 style="color: #ffffff;">The results to your query are:</h1>
-<div style="display: flex; justify-content: center;">
-    {% for key, values in result.items() %}
-    <table>
-        <tr>
-            <th style="border-bottom: 2px solid;">{{ key }}</th>
-        </tr>
-        {% for i in values %}
-        <tr>
-            <td style="max-width: 80ch; margin: 2px 0px;  white-space: nowrap;  overflow: hidden;  text-overflow: ellipsis;">{{ i }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-    {% endfor %}
+<body>
+<h1>Results</h1>
 
-</div>
+ {% for element in result %}
+      <p>{{ element }} </p>
+  {% endfor %}
 </body>
 </html>
