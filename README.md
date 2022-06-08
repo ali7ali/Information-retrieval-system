@@ -2,6 +2,7 @@
 # Information Retrieval System
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
+
 *Damascus University - Faculty of Information Technology Engineering*
 
 Building an information retrieval system capable of adding documents in a specific field and the ability to query using natural language textually for information within these files.
@@ -69,7 +70,7 @@ Second database: **CISI.ALL**
 
 We have processed this text in a similar way to the previous database, where we assumed that each file had a new identifier and content, so that the content was to collect the title, author and content of the file, so that we could access the important section of the file, which is the content in our case, and treat it in an optimal way.
 
-### The First stage
+#### First stage
 
 The first stage of the project is based on the process of cleaning corpus data or the so-called pre-processing data, which is concerned with standardizing the form of the data that we will deal with later by removing the unimportant or most frequent words in the language called stop words and standardizing the form of some of the most frequent patterns in the files such as dates and rooting words
 Before starting to apply the stages of cleaning files, we will read the datasets, which are:
