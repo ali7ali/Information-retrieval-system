@@ -1,9 +1,9 @@
 # Information Retrieval System
 *Damascus University - Faculty of Information Technology Engineering*
 
-##Main Screen:
+## Main Screen:
 <BR><img src="IR-UI.png"/>
 
 
-##Results Screen:
+## Results Screen:
 <BR><img src="IR-UI-Result.png"/>
