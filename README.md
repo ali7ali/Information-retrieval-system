@@ -1,6 +1,7 @@
 
 # Information Retrieval System
 
+
 *Damascus University - Faculty of Information Technology Engineering*
 
 Building an information retrieval system capable of adding documents in a specific field and the ability to query using natural language textually for information within these files.
