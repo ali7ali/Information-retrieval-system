@@ -1,21 +1,23 @@
-
 # Information Retrieval System
+
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-
-*Damascus University - Faculty of Information Technology Engineering*
+_Damascus University - Faculty of Information Technology Engineering - Something_
 
 Building an information retrieval system capable of adding documents in a specific field and the ability to query using natural language textually for information within these files.
 
 ## Main Screen:
+
 <BR><img src="IR-UI.png"/>
 
-
 ## Results Screen:
+
 <BR><img src="IR-UI-Result.png"/>
 
 ## System Features
+
 Building and implementing an information retrieval system that includes:
+
 - Text processing of files The ability to root words using one of the well-known rooting algorithms.
 - Text processing of files Ability to access irregular words (such as irregular verbs)
 - Text processing of files that have different formats (such as dates)
@@ -26,16 +28,17 @@ Building and implementing an information retrieval system that includes:
 - Search UI
 
 ## Advanced Features
+
 - Use advanced word embedding models
 - Topic detection
 - Precision@10 precision – recall - precision - Mean Average Precision (MAP) - Mean Reciprocal Rank (MRR)
-
 
 ## Database characterization
 
 Both databases used in the project contain a number of files (documents), which in turn contain a number of sections and must be processed.
 
 **Databases used:**
+
 - CACM.ALL
 - CISI.ALL
 
@@ -50,7 +53,6 @@ First database: **CACM.ALL**
 .W: the content of each file
 
 .X : References for each file
-
 
 We processed and read this text so that we assumed that each file had a new identifier and content, so that the content was the combination of the title, author and content of the file so that we could access the important section of the file, which in our case is the content (content)
 
@@ -74,11 +76,13 @@ We have processed this text in a similar way to the previous database, where we 
 
 The first stage of the project is based on the process of cleaning corpus data or the so-called pre-processing data, which is concerned with standardizing the form of the data that we will deal with later by removing the unimportant or most frequent words in the language called stop words and standardizing the form of some of the most frequent patterns in the files such as dates and rooting words
 Before starting to apply the stages of cleaning files, we will read the datasets, which are:
+
 - CACM.ALL
 - CISI.ALL
-We will convert them to tables to facilitate reading, dealing with and cleaning them, by taking advantage of the **pandas** library
-To convert files from textual content to tables that can focus on one of its columns and manipulation
-more effectively.
+  We will convert them to tables to facilitate reading, dealing with and cleaning them, by taking advantage of the **pandas** library
+  To convert files from textual content to tables that can focus on one of its columns and manipulation
+  more effectively.
+
 ```javascript
 cisi_text = ""
 f1 = open('d:\\fifth\IR\IR\IR_Project_datasets-20220522T051310Z-001\IR_Project_datasets\CISI\cisi.txt', 'r')
@@ -254,6 +258,7 @@ round6 = lambda x: clean_text_round6(x)
 ### The Third stage
 
 To access similar patterns such as dates, we can take advantage of the **date finder** library to find dates in various forms in the files, and because the algorithm on which the library is built, if it finds a date without a week or a month, it replaces it with the current day and month. To avoid this problem, we can dispense with the full date and replace it with the year.
+
 ```javascript
 #forth cleaning round
 #working on dates finding
@@ -280,11 +285,12 @@ round4 = lambda x: clean_text_round4(x)
 
 To correct words or misspellings in the query we make use of the **autocorrect** library where the function is:
 
-We noticed that this library corrects the names in the query to other English words, which prompted us to exclude the names that we collected and stored in the ***person_names*** list in two stages:
+We noticed that this library corrects the names in the query to other English words, which prompted us to exclude the names that we collected and stored in the **_person_names_** list in two stages:
 
-1) The first phase: While reading the corpus we read the section on author name and add it to the list
+1. The first phase: While reading the corpus we read the section on author name and add it to the list
 
-2) The second phase: In the fifth request, it was requested to collect the names in the files and we added them to the same list
+2. The second phase: In the fifth request, it was requested to collect the names in the files and we added them to the same list
+
 ```javascript
 #third cleaning round
 #working on auto correct
@@ -396,13 +402,13 @@ round6 = lambda x: clean_text_round6(x)
 
 ### Building an index
 
-After we have implemented all the stages of cleaning and standardizing the data form, we can build the indexing **term-document index**, which is the index that links the unique indexing term to different files. 
+After we have implemented all the stages of cleaning and standardizing the data form, we can build the indexing **term-document index**, which is the index that links the unique indexing term to different files.
 
 We can also access this index by taking advantage of **sklearn** in two ways:
 
-1) **CountVectorizer**: This model deduces the indexing term from the given files and for each file it counts the times the indexing term is repeated.
+1. **CountVectorizer**: This model deduces the indexing term from the given files and for each file it counts the times the indexing term is repeated.
 
-2) **TfidfVectorizer**: This model deduces the indexing term, but instead of counting it, it deduces the percentage of its existence and its relationship to the text by calculating the value of the **tfidf** through a mathematical equation.
+2. **TfidfVectorizer**: This model deduces the indexing term, but instead of counting it, it deduces the percentage of its existence and its relationship to the text by calculating the value of the **tfidf** through a mathematical equation.
 
 Since the mathematical value that expresses the percentage of the indexing term in a particular text is more accurate than the number of times it is present in that text, we used the **TfidfVectorizer**
 
@@ -486,7 +492,7 @@ def matching_function(corpus, queries, answers):
     return output
 ```
 
-To test the results of all queries in comparison to the queries_answer file, we used the concepts of ***precision***, ***recall*** provided by **sklearn** after building the calculate_measures function.
+To test the results of all queries in comparison to the queries_answer file, we used the concepts of **_precision_**, **_recall_** provided by **sklearn** after building the calculate_measures function.
 
 ```javascript
 def calculate_measures(true_answers, test_answers, document_size):
@@ -521,12 +527,12 @@ def calculate_measures(true_answers, test_answers, document_size):
     return accurecy_measures
 ```
 
-Then we calculated the measures of accuracy (***precision***, ***recall***) for our method by taking advantage of the calculate measure, and we created a function for the ***Mean Reciprocal Rank***:
+Then we calculated the measures of accuracy (**_precision_**, **_recall_**) for our method by taking advantage of the calculate measure, and we created a function for the **_Mean Reciprocal Rank_**:
 
 ```javascript
 def caculate_mrr(results,truths):
     MAX_RANK = 1000
-    ranked_table = {'query_id':[],'document_id':[],'rank':[]} 
+    ranked_table = {'query_id':[],'document_id':[],'rank':[]}
     answers_table = {'query_id':[],'document_id':[]}
     for row in results:
         temp_list = results[row]
@@ -537,7 +543,7 @@ def caculate_mrr(results,truths):
             ranked_table['rank'].append(i)
             i = i+1
     ranked_df = pd.DataFrame(ranked_table)
-    
+
     for row in truths:
         temp_list = truths[row]
         for num in temp_list:
@@ -551,8 +557,11 @@ def caculate_mrr(results,truths):
     mrr = (1 / hits.groupby('query_id')['rank'].min()).mean()
     return mrr
 ```
+
 # Advanced Features
+
 ## Topic Modelling
+
 To find the topics covered in the database, we make use of the models provided by the **genism** library, but to begin with and to improve the results that will result from using this library, we will limit the processed content to words and sources (that is, similar topics are determined by sources because verbs do not express content) by dependent function extract_names_and_adjectives:
 
 ```javascript
@@ -579,16 +588,18 @@ id2word = corpora.Dictionary(dataset)
 #create corpus
 texts = dataset
 
-# Term Document Frequency 
-c = [id2word.doc2bow(text) for text in texts]  
+# Term Document Frequency
+c = [id2word.doc2bow(text) for text in texts]
 ```
+
 After forming the new corpus we passed it to the **LDA model** provided by the **genism** library and determined the number of topics and the number of passes i.e. times to modify these topics to reach them in their best form.
 
 The goal of this model is to infer mix of topics for each document and infer the mix of words for each topic.
+
 ```javascript
 lda_model = gensim.models.ldamodel.LdaModel(corpus=c,
                                            id2word=id2word,
-                                           num_topics=12, 
+                                           num_topics=12,
                                            random_state=100,
                                            update_every=1,
                                            chunksize=100,
@@ -600,7 +611,8 @@ lda_model = gensim.models.ldamodel.LdaModel(corpus=c,
 pprint(lda_model.print_topics())
 doc_lda = lda_model[c]
 print(doc_lda)
-```         
+```
+
 To measure the validity of the number of topics and the validity of the number of passes, we can use two measures:
 
 - **Perplexity**: a scale whose value is in the range [0,-10] and the smaller this value, the better the number of topics
@@ -609,7 +621,7 @@ To measure the validity of the number of topics and the validity of the number o
 
 ```javascript
 # Compute Perplexity
-print('\nPerplexity: ', lda_model.log_perplexity(c))  
+print('\nPerplexity: ', lda_model.log_perplexity(c))
 # a measure of how good the model is. lower the better.
 
 # Compute Coherence Score
@@ -619,11 +631,13 @@ print('\nCoherence Score: ', coherence_lda)
 
 # Lower the perplexity better the model.
 # Higher the topic coherence, the topic is more human interpretable.
-```    
+```
+
 ## Word Embedding
+
 This technique is concerned with creating a new representation of the word so that the word and all its vocabulary have a similar mathematical representation, making similar texts have a close mathematical representation.
 
-We implemented this technique via the **spacy**library and ***en_core_web_sm*** thesaurus download and to make this technique give the best possible results we have added some methods for cleaning queries, corpus :
+We implemented this technique via the **spacy**library and **_en_core_web_sm_** thesaurus download and to make this technique give the best possible results we have added some methods for cleaning queries, corpus :
 
 ```javascript
 nlp = spacy.load("en_core_web_sm")
@@ -641,12 +655,13 @@ def delete_numbers(text):
     for w in words:
         if w.isnumeric():
             w = ' '
-        new_text += w + ' '   
+        new_text += w + ' '
     return new_text
 del_numbers = lambda x: delete_numbers(x)
-```  
+```
 
 We can pass through all queries and convert them to vector via the vector method:
+
 ```javascript
 cisi_queries_list = []
 cisi_queries_word_embedding_vectors = []
@@ -697,8 +712,10 @@ for out in output:
         output[out][i] = num+1
         i = i + 1
 
-```  
+```
+
 ### 🛠 Files Structure
+
     .
     ├── UI
     |   ├── templates
@@ -711,7 +728,7 @@ for out in output:
     ├── mian.py                 # The same as IR project.ipynb but converted to work with the UI
     ├── README.md               # Project Documentation
     └── ...
-    
+
 ## 🚀 Running the Project
 
 - Install all the imported Libraries.
@@ -722,6 +739,7 @@ for out in output:
 ```
 
 - Run the Project via terminal
+
 ```bash
   cd UI
   Python Search.py
@@ -729,11 +747,10 @@ for out in output:
 
 ## References
 
- - [Gensim Documentation](https://radimrehurek.com/gensim/auto_examples/core/run_core_concepts.html#sphx-glr-auto-examples-core-run-core-concepts-py)
- - [Word Embedding In NLP with Python Code Implementation](https://www.analyticssteps.com/blogs/word-embedding-nlp-python-code)
- - [TF-IDF from scratch in python on a real-world dataset](https://towardsdatascience.com/tf-idf-for-document-ranking-from-scratch-in-python-on-real-world-dataset-796d339a4089)
- - [Information Retrieval using Boolean Query in Python](https://medium.com/voice-tech-podcast/information-retrieval-using-boolean-query-in-python-e0ea9bf57f76)
-
+- [Gensim Documentation](https://radimrehurek.com/gensim/auto_examples/core/run_core_concepts.html#sphx-glr-auto-examples-core-run-core-concepts-py)
+- [Word Embedding In NLP with Python Code Implementation](https://www.analyticssteps.com/blogs/word-embedding-nlp-python-code)
+- [TF-IDF from scratch in python on a real-world dataset](https://towardsdatascience.com/tf-idf-for-document-ranking-from-scratch-in-python-on-real-world-dataset-796d339a4089)
+- [Information Retrieval using Boolean Query in Python](https://medium.com/voice-tech-podcast/information-retrieval-using-boolean-query-in-python-e0ea9bf57f76)
 
 ## Authors
 
